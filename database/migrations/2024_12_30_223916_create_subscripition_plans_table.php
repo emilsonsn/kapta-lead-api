@@ -23,21 +23,11 @@ return new class extends Migration
 
         Schema::create('user_plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('subscription_plan_id');
+            $table->foreignId('user_id');
+            $table->foreignId('subscription_plan_id');
             $table->boolean('is_active');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-
-            $table->foreign('subscription_plan_id')
-                ->references('id')
-                ->on('subscription_plans')
-                ->onDelete('cascade');
         });
     }
 
@@ -46,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('user_plans');
         Schema::dropIfExists('subscripition_plans');
     }
 };

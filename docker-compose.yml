@@ -1,5 +1,5 @@
 services:
-    laravel.test:
+    kapta-lead-api:
         build:
             context: .
             dockerfile: dockerfiles/php/Dockerfile
